@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useTransition } from "react";
 import { BucketListItem } from "@/lib/types";
 import { removeFromBucketList } from "@/app/actions/bucket-list";
@@ -27,21 +28,23 @@ export function BucketListCard({ item }: { item: BucketListItem }) {
   return (
     <div className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-stone-200/60">
       {item.flag_url && (
-        <div className="relative aspect-[3/2] overflow-hidden bg-stone-100">
+        <Link href={`/country/${item.country_code}`} className="relative aspect-[3/2] overflow-hidden bg-stone-100">
           <img
             src={item.flag_url}
             alt={`Flag of ${item.country_name}`}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
           />
-        </div>
+        </Link>
       )}
 
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-2">
           <div>
-            <h3 className="text-lg font-bold text-slate-900">
-              {item.country_name}
-            </h3>
+            <Link href={`/country/${item.country_code}`} className="hover:underline">
+              <h3 className="text-lg font-bold text-slate-900">
+                {item.country_name}
+              </h3>
+            </Link>
             <p className="text-sm text-muted">Added {addedDate}</p>
           </div>
           <button

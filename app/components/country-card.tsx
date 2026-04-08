@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import { useState, useTransition } from "react";
 import { CountrySearchResult } from "@/lib/types";
@@ -31,16 +32,18 @@ export function CountryCard({
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-stone-200/60 transition-all hover:shadow-lg hover:ring-stone-300/60">
-      <div className="relative aspect-[3/2] overflow-hidden bg-stone-100">
+      <Link href={`/country/${country.code}`} className="relative aspect-[3/2] overflow-hidden bg-stone-100">
         <img
           src={country.flagUrl}
           alt={`Flag of ${country.name}`}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="text-lg font-bold text-slate-900">{country.name}</h3>
+        <Link href={`/country/${country.code}`} className="hover:underline">
+          <h3 className="text-lg font-bold text-slate-900">{country.name}</h3>
+        </Link>
         <p className="mt-0.5 text-sm text-muted">{country.officialName}</p>
 
         <div className="mt-3 flex flex-wrap gap-2">
