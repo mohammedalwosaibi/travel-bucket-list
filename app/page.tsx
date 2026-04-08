@@ -1,7 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
 import { Hero } from "./components/hero";
 import { CountrySearch } from "./components/country-search";
+import { PopularCountries } from "./components/popular-countries";
 import { createServerSupabaseClient } from "@/lib/supabase";
+import { getPopularCountries } from "./actions/bucket-list";
 
 export default async function HomePage() {
   let savedCodes: string[] = [];
@@ -16,10 +18,13 @@ export default async function HomePage() {
     savedCodes = data?.map((row) => row.country_code) ?? [];
   }
 
+  const popularCountries = await getPopularCountries();
+
   return (
     <div className="pb-20">
       <Hero />
       <CountrySearch savedCodes={savedCodes} />
+      <PopularCountries countries={popularCountries} savedCodes={savedCodes} />
     </div>
   );
 }

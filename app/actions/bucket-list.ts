@@ -79,6 +79,23 @@ export async function updateNotes(
   return { success: true };
 }
 
+export interface PopularCountry {
+  country_name: string;
+  country_code: string;
+  flag_url: string | null;
+  capital: string | null;
+  region: string | null;
+  save_count: number;
+}
+
+export async function getPopularCountries(): Promise<PopularCountry[]> {
+  const supabase = createServerSupabaseClient();
+  const { data, error } = await supabase.rpc("get_popular_countries");
+
+  if (error || !data) return [];
+  return data as PopularCountry[];
+}
+
 export async function getBucketList(): Promise<BucketListItem[]> {
   const { userId } = await auth();
   if (!userId) return [];
