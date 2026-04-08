@@ -23,7 +23,7 @@ export default async function HomePage() {
   return (
     <div className="pb-20">
       <Hero />
-      <CountrySearch savedCodes={savedCodes} />
+      <CountrySearch savedCodes={savedCodes} hasPopularCountries={popularCountries.length > 0} />
       <PopularCountries countries={popularCountries} savedCodes={savedCodes} />
     </div>
   );

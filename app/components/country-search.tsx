@@ -7,8 +7,10 @@ import { CountryCard } from "./country-card";
 
 export function CountrySearch({
   savedCodes,
+  hasPopularCountries,
 }: {
   savedCodes?: string[];
+  hasPopularCountries?: boolean;
 }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<CountrySearchResult[]>([]);
@@ -79,7 +81,7 @@ export function CountrySearch({
         </div>
       )}
 
-      {!hasSearched && results.length === 0 && (
+      {!hasSearched && results.length === 0 && !hasPopularCountries && (
         <div className="mt-16 text-center">
           <span className="text-4xl">🧭</span>
           <p className="mt-3 text-lg font-medium text-slate-700">
